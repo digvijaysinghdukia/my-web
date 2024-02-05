@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      position: sticky;
+      top: 0px;
+    }
+
+    .section.visible {
+      opacity: 1;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const sections = document.querySelectorAll(".section");
+      let currentSection = 0;
+
+      function updateVisibleSection() {
+        sections.forEach((section, index) => {
+          if (index === currentSection) {
+            section.classList.add("visible");
+          } else {
+            section.classList.remove("visible");
+          }
+        });
+      }
+
+      function handleScroll() {
+        const scrollPosition = window.scrollY;
+        currentSection = Math.floor(scrollPosition / window.innerHeight);
+        updateVisibleSection();
+      }
+
+      window.addEventListener("scroll", handleScroll);
+      updateVisibleSection(); // Initial setup
+    });
+  </script>
+</head>
+<body>
+  <div class="section">Section A</div>
+  <div class="section">Section B</div>
+  <div class="section">Section C</div>
+  <div class="section">Section D</div>
+  <div class="section">Section E</div>
+</body>
+</html>
